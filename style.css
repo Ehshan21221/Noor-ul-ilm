@@ -267,6 +267,22 @@ nav a:hover::after { transform: scaleX(1); }
   background: var(--forest);
   position: relative; overflow: hidden;
 }
+
+@media (max-width: 600px) {
+  .hero-left {
+    align-items: center;
+    text-align: center;
+    padding: 100px 8vw 60px;
+  }
+  .hero-title { text-align: center; }
+  .hero-title em { text-align: center; }
+  .hero-arabic { text-align: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-regions { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .hero-tagline { text-align: center; }
+  .hero-ar-wm { display: none; }
+}
 .hero-left-pattern {
   position: absolute; inset: 0; opacity: 0.04;
   background-image:
