@@ -323,7 +323,7 @@ nav a:hover::after { transform: scaleX(1); }
 .hero-img-placeholder {
   width: 100%; height: 100%;
   position: absolute; inset: 0;
-  background-image: url('images/hero.jpg');
+  background-image: url('hero.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -419,7 +419,7 @@ section { position: relative; overflow: hidden; }
 /* FIX: replaced founder image with gradient placeholder */
 .founder-img-placeholder {
   width: 100%; aspect-ratio: 3/4;
-  background-image: url('images/founder.jpg');
+  background-image: url('founder.jpg');
   background-size: cover;
   background-position: center top;
   display: block;
@@ -509,7 +509,7 @@ section { position: relative; overflow: hidden; }
 /* FIX: tribute image replaced with gradient placeholder */
 .tribute-img-placeholder {
   width: 100%; aspect-ratio: 3/4;
-  background-image: url('images/tribute.jpg');
+  background-image: url('tribute.jpg');
   background-size: cover;
   background-position: center;
 }
