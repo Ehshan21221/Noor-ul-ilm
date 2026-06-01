@@ -128,16 +128,7 @@ function switchTab(tabName) {
 }
 
 
-/* ============================================================
-   ENROLMENT FORM SUBMISSION
-   ============================================================ */
 
-
-  // In a real deployment, you would send form data to your backend here
-  // Example using fetch:
-  // var formData = new FormData(form);
-  // fetch('/submit', { method: 'POST', body: formData });
-}
 
 
 /* ============================================================
