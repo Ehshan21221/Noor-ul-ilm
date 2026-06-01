@@ -131,17 +131,7 @@ function switchTab(tabName) {
 /* ============================================================
    ENROLMENT FORM SUBMISSION
    ============================================================ */
-function handleFormSubmit(event) {
-  event.preventDefault();
 
-  var form = event.target;
-  var successMsg = document.getElementById('formSuccess');
-
-  // Hide form, show success message
-  form.style.display = 'none';
-  if (successMsg) {
-    successMsg.classList.add('show');
-  }
 
   // In a real deployment, you would send form data to your backend here
   // Example using fetch:
