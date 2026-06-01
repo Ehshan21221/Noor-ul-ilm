@@ -1,19 +1,3 @@
-/* ============================================================
-   NOOR AL-ILM · script.js
-   Fixed issues:
-   - Loader now has a hard timeout fallback (fixes Android freeze)
-   - Loader dismisses even if page resources are slow
-   - Mobile nav toggle works correctly
-   - Tab switching for syllabus
-   - Form submission handler
-   ============================================================ */
-
-/* ============================================================
-   LOADER — FIXED FOR ANDROID
-   The original code had no timeout fallback. On Android, the
-   loader would never dismiss if the page was still parsing
-   the heavy base64 image. Now it ALWAYS dismisses.
-   ============================================================ */
 (function () {
   var loaderBar = document.getElementById('loaderBar');
   var loader = document.getElementById('loader');
@@ -31,7 +15,6 @@
     clearInterval(interval);
   }
 
-  // Animate the progress bar
   interval = setInterval(function () {
     progress += Math.random() * 15;
     if (progress >= 100) {
@@ -45,11 +28,8 @@
     }
   }, 120);
 
-  // HARD TIMEOUT FALLBACK — always dismiss after 3 seconds max
-  // This is the key fix for Android where JS was blocked by the base64 parsing
-  setTimeout(dismissLoader, 3000);
+  setTimeout(dismissLoader, 1500);
 
-  // Also dismiss when page is fully loaded
   window.addEventListener('load', function () {
     progress = 100;
     if (loaderBar) loaderBar.style.width = '100%';
@@ -57,15 +37,10 @@
   });
 })();
 
-
-/* ============================================================
-   MOBILE NAV
-   ============================================================ */
 function toggleMobileNav() {
   var nav = document.getElementById('mobileNav');
   var hamburger = document.getElementById('hamburger');
   if (!nav || !hamburger) return;
-
   var isOpen = nav.classList.contains('open');
   if (isOpen) {
     nav.classList.remove('open');
@@ -74,7 +49,7 @@ function toggleMobileNav() {
   } else {
     nav.classList.add('open');
     hamburger.classList.add('open');
-    document.body.style.overflow = 'hidden'; // prevent background scroll
+    document.body.style.overflow = 'hidden';
   }
 }
 
@@ -86,7 +61,6 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-// Close mobile nav when clicking outside
 document.addEventListener('click', function (e) {
   var nav = document.getElementById('mobileNav');
   var hamburger = document.getElementById('hamburger');
@@ -98,56 +72,32 @@ document.addEventListener('click', function (e) {
   }
 });
 
-
-/* ============================================================
-   SYLLABUS TAB SWITCHING
-   ============================================================ */
 function switchTab(tabName) {
-  // Hide all panels
-  var panels = document.querySelectorAll('.tab-panel');
-  panels.forEach(function (panel) {
-    panel.classList.remove('on');
+  document.querySelectorAll('.tab-panel').forEach(function (p) {
+    p.classList.remove('on');
   });
-
-  // Remove active from all tabs
-  var tabs = document.querySelectorAll('.tab');
-  tabs.forEach(function (tab) {
-    tab.classList.remove('on');
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.classList.remove('on');
   });
-
-  // Show selected panel
-  var targetPanel = document.getElementById('tab-' + tabName);
-  if (targetPanel) targetPanel.classList.add('on');
-
-  // Activate clicked tab
-  tabs.forEach(function (tab) {
-    if (tab.getAttribute('onclick') === "switchTab('" + tabName + "')") {
-      tab.classList.add('on');
+  var panel = document.getElementById('tab-' + tabName);
+  if (panel) panel.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function (t) {
+    if (t.getAttribute('onclick') === "switchTab('" + tabName + "')") {
+      t.classList.add('on');
     }
   });
 }
 
-
-
-
-
-/* ============================================================
-   SCROLL REVEAL — lightweight, no library needed
-   ============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
-  // Simple scroll reveal using IntersectionObserver
   if (!('IntersectionObserver' in window)) return;
-
-  var revealElements = document.querySelectorAll(
+  var els = document.querySelectorAll(
     '.pillar, .track-card, .testimonial-card, .syl-item, .loc-item, .founder-inner, .tribute-inner'
   );
-
-  revealElements.forEach(function (el) {
+  els.forEach(function (el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   });
-
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -157,16 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }, { threshold: 0.1 });
-
-  revealElements.forEach(function (el) {
+  els.forEach(function (el) {
     observer.observe(el);
   });
 });
 
-
-/* ============================================================
-   HEADER SCROLL BEHAVIOUR
-   ============================================================ */
 window.addEventListener('scroll', function () {
   var header = document.getElementById('mainHeader');
   if (!header) return;
