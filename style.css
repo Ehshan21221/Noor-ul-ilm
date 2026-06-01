@@ -445,6 +445,7 @@ section { position: relative; overflow: hidden; }
   width: 55%; height: 55%;
   border: 2px solid var(--gold); border-radius: 2px;
   z-index: 0; opacity: 0.25; pointer-events: none;
+  display: none;
 }
 .founder-badge {
   position: absolute; top: 20px; left: 20px; z-index: 3;
