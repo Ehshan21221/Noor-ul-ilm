@@ -424,7 +424,7 @@ section { position: relative; overflow: hidden; }
   display: grid; grid-template-columns: 1fr 1.1fr;
   gap: 80px; align-items: center; padding: 100px 6vw;
 }
-.founder-img-wrap { position: relative; }
+.founder-img-wrap { position: relative; overflow: hidden; }
 .founder-img-frame {
   position: relative; overflow: hidden; border-radius: 2px;
 }
