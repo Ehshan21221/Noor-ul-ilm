@@ -468,7 +468,7 @@ section { position: relative; overflow: hidden; }
   background-position: center;
 }
 .tribute-dua {
-  position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
   background: var(--forest); border: 1px solid var(--gold);
   padding: 10px 20px; white-space: nowrap;
   font-family: var(--font-ar); font-size: 0.9rem; color: var(--gold-pale); direction: rtl;
