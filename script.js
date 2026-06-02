@@ -89,6 +89,17 @@ function switchTab(tabName) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      var headerHeight = document.getElementById('mainHeader').offsetHeight;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
   if (!('IntersectionObserver' in window)) return;
   var els = document.querySelectorAll(
     '.pillar, .track-card, .testimonial-card, .syl-item, .loc-item, .founder-inner, .tribute-inner'
@@ -124,14 +135,3 @@ window.addEventListener('scroll', function () {
   }
 }, { passive: true });
 
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    var target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      var headerHeight = document.getElementById('mainHeader').offsetHeight;
-      var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-    }
-  });
-});
