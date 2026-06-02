@@ -123,3 +123,15 @@ window.addEventListener('scroll', function () {
     header.style.boxShadow = 'none';
   }
 }, { passive: true });
+
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      var headerHeight = document.getElementById('mainHeader').offsetHeight;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
