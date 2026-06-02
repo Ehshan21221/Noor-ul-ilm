@@ -37,6 +37,15 @@
   });
 })();
 
+function scrollToSection(id) {
+  var target = document.getElementById(id);
+  if (!target) return;
+  var header = document.getElementById('mainHeader');
+  var headerHeight = header ? header.offsetHeight : 64;
+  var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
 function toggleMobileNav() {
   var nav = document.getElementById('mobileNav');
   var hamburger = document.getElementById('hamburger');
@@ -61,17 +70,6 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-document.addEventListener('click', function (e) {
-  var nav = document.getElementById('mobileNav');
-  var hamburger = document.getElementById('hamburger');
-  if (!nav || !hamburger) return;
-  if (nav.classList.contains('open')) {
-    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
-      closeMobileNav();
-    }
-  }
-});
-
 function switchTab(tabName) {
   document.querySelectorAll('.tab-panel').forEach(function (p) {
     p.classList.remove('on');
@@ -88,18 +86,29 @@ function switchTab(tabName) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    var target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      var headerHeight = document.getElementById('mainHeader').offsetHeight;
-      var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+document.addEventListener('click', function (e) {
+  var nav = document.getElementById('mobileNav');
+  var hamburger = document.getElementById('hamburger');
+  if (!nav || !hamburger) return;
+  if (nav.classList.contains('open')) {
+    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMobileNav();
     }
-  });
+  }
 });
+
+window.addEventListener('load', function () {
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      var id = href.replace('#', '');
+      closeMobileNav();
+      scrollToSection(id);
+    });
+  });
+
   if (!('IntersectionObserver' in window)) return;
   var els = document.querySelectorAll(
     '.pillar, .track-card, .testimonial-card, .syl-item, .loc-item, .founder-inner, .tribute-inner'
@@ -134,4 +143,3 @@ window.addEventListener('scroll', function () {
     header.style.boxShadow = 'none';
   }
 }, { passive: true });
-
