@@ -45,7 +45,14 @@ function scrollToSection(id) {
   var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
   window.scrollTo({ top: top, behavior: 'smooth' });
 }
-
+function heroScroll(id) {
+  var target = document.getElementById(id);
+  if (!target) return;
+  var header = document.getElementById('mainHeader');
+  var headerHeight = header ? header.offsetHeight : 64;
+  var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
 function toggleMobileNav() {
   var nav = document.getElementById('mobileNav');
   var hamburger = document.getElementById('hamburger');
